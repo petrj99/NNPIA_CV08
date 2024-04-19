@@ -32,8 +32,21 @@ function LogoutButton(props) {
     );
 }
 
+function WarningBanner(props) {
+    if (!props.warn) {
+        return null;
+    }
+
+    return (
+        <div className="warning">
+            Warning!
+        </div>
+    );
+}
+
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [showWarning, setShowWarning] = useState(true);
 
     const handleLoginClick = () => {
         setIsLoggedIn(true);
@@ -43,6 +56,10 @@ function App() {
         setIsLoggedIn(false);
     };
 
+    const toggleWarning = () => {
+        setShowWarning(!showWarning);
+    };
+
     return (
         <div>
             <Greeting isLoggedIn={isLoggedIn} />
@@ -50,6 +67,10 @@ function App() {
                 ? <LogoutButton onClick={handleLogoutClick} />
                 : <LoginButton onClick={handleLoginClick} />
             }
+            <button onClick={toggleWarning}>
+                {showWarning ? 'Hide Warning' : 'Show Warning'}
+            </button>
+            <WarningBanner warn={showWarning} />
         </div>
     );
 }
