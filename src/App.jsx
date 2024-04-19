@@ -7,12 +7,10 @@ import ReactDOM from "react-dom/client";
 class Clock extends React.Component {
     constructor(props) {
         super(props);
-        // Inicializace stavu s aktuálním časem
         this.state = { date: new Date() };
     }
 
     componentDidMount() {
-        // Nastavení intervalu pro aktualizaci času
         this.timerID = setInterval(
             () => this.tick(),
             1000
@@ -20,12 +18,10 @@ class Clock extends React.Component {
     }
 
     componentWillUnmount() {
-        // Čištění intervalu, když komponenta opouští DOM
         clearInterval(this.timerID);
     }
 
     tick() {
-        // Aktualizace stavu na nové datum a čas
         this.setState({
             date: new Date()
         });
@@ -45,12 +41,33 @@ function Welcome(props) {
     return <h1>Hello, {props.name}!</h1>;
 }
 
+function activateLasers() {
+    console.log('Lasers activated!');
+}
+
+function Form() {
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log('You clicked submit.');
+    }
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <button type="submit">Submit</button>
+        </form>
+    );
+}
+
 function App() {
     return (
         <div>
             <Welcome name="Peter"/>
             <Welcome name="Joseph"/>
             <Welcome name="Josefine"/>
+            <button onClick={activateLasers}>
+                Activate Lasers
+            </button>
+            <Form />
             <Clock />
         </div>
     );
