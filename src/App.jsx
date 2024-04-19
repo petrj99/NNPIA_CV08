@@ -16,9 +16,13 @@ function App() {
         return () => clearInterval(timerId);
     }, []);
 
+    function Welcome(props) {
+        return <h1>Hello, {props.name}</h1>;
+    }
+
     return (
         <div>
-            <h1>Hello, world!</h1>
+            <Welcome name="Peter" />
             <h2>Current time is {currentTime.toLocaleTimeString()}.</h2>
             <h3>Today is {currentTime.toLocaleDateString()}.</h3>
         </div>
