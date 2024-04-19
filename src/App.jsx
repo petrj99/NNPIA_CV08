@@ -41,10 +41,6 @@ function Welcome(props) {
     return <h1>Hello, {props.name}!</h1>;
 }
 
-function activateLasers() {
-    console.log('Lasers activated!');
-}
-
 function Form() {
     function handleSubmit(e) {
         e.preventDefault();
@@ -59,14 +55,22 @@ function Form() {
 }
 
 function App() {
+    const [lasersActive, setLasersActive] = useState(false);
+
+    function handleButtonClick() {
+        setLasersActive(true);
+        console.log('Lasers activated!');
+    }
+
     return (
         <div>
             <Welcome name="Peter"/>
             <Welcome name="Joseph"/>
             <Welcome name="Josefine"/>
-            <button onClick={activateLasers}>
+            <button onClick={handleButtonClick}>
                 Activate Lasers
             </button>
+            {lasersActive && <p>Lasers have been activated!</p>}
             <Form />
             <Clock />
         </div>
