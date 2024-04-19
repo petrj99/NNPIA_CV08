@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -6,43 +6,26 @@ import ReactDOM from "react-dom/client";
 
 function App() {
   const [count, setCount] = useState(0)
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    function tick() {
-        const element = (
-            <div>
-                <h1>Hello, world!</h1>
-                <h2>It is {new Date().toLocaleTimeString()}.</h2>
-            </div>
-        );
-        root.render(element);
-    }
+    const [currentTime, setCurrentTime] = useState(new Date());
 
-    setInterval(tick, 1000);
+    useEffect(() => {
+        const timerId = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+        return () => clearInterval(timerId);
+    }, []);
+
+    return (
+        <div>
+            <h1>Hello, world!</h1>
+            <h2>Current time is {currentTime.toLocaleTimeString()}.</h2>
+            <h3>Today is {currentTime.toLocaleDateString()}.</h3>
+        </div>
+    );
 }
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
 
 export default App
