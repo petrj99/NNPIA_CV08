@@ -13,11 +13,7 @@ function GuestGreeting(props) {
 }
 
 function Greeting(props) {
-    const isLoggedIn = props.isLoggedIn;
-    if (isLoggedIn) {
-        return <UserGreeting />;
-    }
-    return <GuestGreeting />;
+    return props.isLoggedIn ? <UserGreeting /> : <GuestGreeting />;
 }
 
 function LoginButton(props) {
@@ -47,16 +43,13 @@ function App() {
         setIsLoggedIn(false);
     };
 
-    let button = isLoggedIn ? (
-        <LogoutButton onClick={handleLogoutClick} />
-    ) : (
-        <LoginButton onClick={handleLoginClick} />
-    );
-
     return (
         <div>
             <Greeting isLoggedIn={isLoggedIn} />
-            {button}
+            {isLoggedIn
+                ? <LogoutButton onClick={handleLogoutClick} />
+                : <LoginButton onClick={handleLoginClick} />
+            }
         </div>
     );
 }
