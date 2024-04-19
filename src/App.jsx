@@ -4,38 +4,56 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import ReactDOM from "react-dom/client";
 
-function Clock() {
-    const [currentTime, setCurrentTime] = useState(new Date());
+class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        // Inicializace stavu s aktuálním časem
+        this.state = { date: new Date() };
+    }
 
-    useEffect(() => {
-        const timerId = setInterval(() => {
-            setCurrentTime(new Date());
-        }, 1000);
+    componentDidMount() {
+        // Nastavení intervalu pro aktualizaci času
+        this.timerID = setInterval(
+            () => this.tick(),
+            1000
+        );
+    }
 
-        return () => clearInterval(timerId);
-    }, []);
+    componentWillUnmount() {
+        // Čištění intervalu, když komponenta opouští DOM
+        clearInterval(this.timerID);
+    }
 
-    return (
-        <div>
-            <h2>Current time is {currentTime.toLocaleTimeString()}.</h2>
-            <h3>Today is {currentTime.toLocaleDateString()}.</h3>
-        </div>
-    );
+    tick() {
+        // Aktualizace stavu na nové datum a čas
+        this.setState({
+            date: new Date()
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Hello, world!</h1>
+                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+            </div>
+        );
+    }
+}
+
+function Welcome(props) {
+    return <h1>Hello, {props.name}!</h1>;
 }
 
 function App() {
     return (
         <div>
-            <Welcome name="Peter" />
-            <Welcome name="Joseph" />
-            <Welcome name="Josefine" />
+            <Welcome name="Peter"/>
+            <Welcome name="Joseph"/>
+            <Welcome name="Josefine"/>
             <Clock />
         </div>
     );
-}
-
-function Welcome(props) {
-    return <h1>Hello, {props.name}!</h1>;
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
