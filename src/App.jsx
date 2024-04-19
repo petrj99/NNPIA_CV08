@@ -54,25 +54,41 @@ function Form() {
     );
 }
 
-function App() {
-    const [lasersActive, setLasersActive] = useState(false);
+function UserGreeting(props) {
+    return <h1>Welcome back!</h1>;
+}
 
-    function handleButtonClick() {
-        setLasersActive(true);
-        console.log('Lasers activated!');
+function GuestGreeting(props) {
+    return <h1>Please sign up.</h1>;
+}
+
+function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+        return <UserGreeting />;
+    }
+    return <GuestGreeting />;
+}
+
+function App() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    function handleLoginClick() {
+        setIsLoggedIn(true);
+    }
+
+    function handleLogoutClick() {
+        setIsLoggedIn(false);
     }
 
     return (
         <div>
             <Welcome name="Peter"/>
-            <Welcome name="Joseph"/>
-            <Welcome name="Josefine"/>
-            <button onClick={handleButtonClick}>
-                Activate Lasers
-            </button>
-            {lasersActive && <p>Lasers have been activated!</p>}
-            <Form />
+            <button onClick={handleLoginClick}>Log in</button>
+            <button onClick={handleLogoutClick}>Log out</button>
+            <Greeting isLoggedIn={isLoggedIn} />
             <Clock />
+            <Form />
         </div>
     );
 }
