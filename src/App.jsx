@@ -58,6 +58,12 @@ function NumberList(props) {
 }
 
 function App() {
+    const numbers = [1, 2, 3, 4, 5];
+    const listItems = numbers.map((number) =>
+        <li key={number.toString()}>
+            {number}
+        </li>
+    );
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showWarning, setShowWarning] = useState(true);
 
@@ -73,7 +79,22 @@ function App() {
         setShowWarning(!showWarning);
     };
 
-    const numbers = [1, 2, 3, 4, 5];
+    const todos = [
+        {id: 1, text: 'Wash the dishes'},
+        {id: 2, text: 'Take out the trash'},
+        {id: 3, text: 'Fold the laundry'}
+    ];
+    const todoItems = todos.map((todo) =>
+        <li key={todo.id}>
+            {todo.text}
+        </li>
+    );
+
+    const todoItemsWithIndex = todos.map((todo, index) =>
+        <li key={index}>
+            {todo.text}
+        </li>
+    );
 
     return (
         <div>
@@ -87,6 +108,12 @@ function App() {
             </button>
             <WarningBanner warn={showWarning} />
             <NumberList numbers={numbers} />
+            <h1>Numbers List</h1>
+            <ul>{listItems}</ul>
+            <h1>Todo List with IDs</h1>
+            <ul>{todoItems}</ul>
+            <h1>Todo List with Index as Key (Not Recommended)</h1>
+            <ul>{todoItemsWithIndex}</ul>
         </div>
     );
 }
