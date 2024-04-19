@@ -7,7 +7,14 @@ import ReactDOM from "react-dom/client";
 function App() {
   const [count, setCount] = useState(0)
     const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<h1>Hello, world!</h1>);
+    const element = (
+        <div>
+            <h1>Hello!</h1>
+            <h2>Good to see you here.</h2>
+        </div>
+    );
+
+    root.render(element);
 
   return (
     <>
