@@ -44,6 +44,19 @@ function WarningBanner(props) {
     );
 }
 
+function NumberList(props) {
+    const numbers = props.numbers;
+    const listItems = numbers.map((number) =>
+        <li key={number.toString()}>
+            {number}
+        </li>
+    );
+
+    return (
+        <ul>{listItems}</ul>
+    );
+}
+
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showWarning, setShowWarning] = useState(true);
@@ -60,6 +73,8 @@ function App() {
         setShowWarning(!showWarning);
     };
 
+    const numbers = [1, 2, 3, 4, 5];
+
     return (
         <div>
             <Greeting isLoggedIn={isLoggedIn} />
@@ -71,6 +86,7 @@ function App() {
                 {showWarning ? 'Hide Warning' : 'Show Warning'}
             </button>
             <WarningBanner warn={showWarning} />
+            <NumberList numbers={numbers} />
         </div>
     );
 }
