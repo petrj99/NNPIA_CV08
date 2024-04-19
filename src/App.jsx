@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -7,11 +7,10 @@ import ReactDOM from "react-dom/client";
 function App() {
   const [count, setCount] = useState(0)
     const root = ReactDOM.createRoot(document.getElementById('root'));
-    const element = (
-        <div>
-            <h1>Hello!</h1>
-            <h2>Good to see you here.</h2>
-        </div>
+    const element = React.createElement(
+        'h1',
+        {className: 'greeting'},
+        'Hello, world!'
     );
 
     root.render(element);
